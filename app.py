@@ -18,6 +18,7 @@ origins = [
     "http://127.0.0.1:5000",
     "http://localhost:5000",
     "https://temp.saddlebagexchange.com",
+    "http://tryanna.xyz",
 ]
 CORS(app, resources={r"/*": {"origins": origins}})
 
