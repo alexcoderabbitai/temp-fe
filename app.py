@@ -20,7 +20,7 @@ origins = [
     "https://temp.saddlebagexchange.com",
     "http://tryanna.xyz",
 ]
-CORS(app, resources={r"/*": {"origins": origins}})
+# CORS(app, resources={r"/*": {"origins": origins}})
 
 # Check for NO_RATE_LIMIT environment variable
 NO_RATE_LIMIT = os.getenv("NO_RATE_LIMIT", False)
