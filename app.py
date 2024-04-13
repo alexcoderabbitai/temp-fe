@@ -823,7 +823,7 @@ def bestdeals():
             json=json_data,
         ).json()
 
-        if "data" not in response:
+        if "data" not in response or len(response["data"]) == 0:
             logger.error(
                 f"Error no matching data with given inputs {json_data} response {response}"
             )
