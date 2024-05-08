@@ -12,6 +12,9 @@ spec:
       labels:
         run: flask-test
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000  # Specify the UID of a non-root user
       imagePullSecrets:
       - name: regcred
       containers:
