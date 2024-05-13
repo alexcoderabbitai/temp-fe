@@ -3,6 +3,8 @@ import json, os
 from flask import Flask, send_from_directory
 from flask import render_template, make_response
 from flask import request
+from flask import jsonify, Response
+
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -78,6 +80,17 @@ def return_safe_html(input_string):
     cleaned_html = html.tostring(document_root, pretty_print=True)
     # if `cleaned_html` differs from `input_string`, the input may contain malicious content.
     return cleaned_html
+
+
+@app.route("/2faca366-0ef0-4acb-9acc-3808e0470952.txt", methods=["GET", "POST"])
+def probely():
+    return Response(
+        "Probely",
+        headers={
+            "Content-Disposition": "attachment; filename=2faca366-0ef0-4acb-9acc-3808e0470952.txt"
+        },
+    )
+    # return "Probely"
 
 
 @app.route("/", methods=["GET", "POST"])
