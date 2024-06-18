@@ -11,10 +11,35 @@ from flask_limiter.util import get_remote_address
 import requests, logging
 from lxml import html
 
+from ddtrace import patch_all, tracer, config, Pin
+
+# Enable Datadog tracing
+patch_all()
+
+# Initialize Datadog tracer
+tracer.configure(
+    hostname="localhost",  # Replace with your Datadog agent hostname if different
+    port=8126,  # Replace with your Datadog agent port if different
+)
+
+# Set Datadog service and environment variables
+os.environ["DD_SERVICE"] = "flask-test"
+os.environ["DD_ENV"] = "production"
+os.environ["DD_VERSION"] = "1.0"
+os.environ["DD_LOGS_INJECTION"] = "true"
+
+# Alternatively, configure Datadog settings directly
+config.service = "flask-test"
+config.env = "production"
+config.version = "1.0"
+
 # Get API URL from environment variable or use default if not set
 api_url = os.getenv("TEMP_API_URL", "http://api.saddlebagexchange.com/api")
 
 app = Flask(__name__)
+# Attach the tracer to the Flask app
+Pin.override(app, service="flask-test")
+
 # Initialize Flask-CORS with your app and specify allowed origins
 origins = [
     "http://127.0.0.1:5000",
