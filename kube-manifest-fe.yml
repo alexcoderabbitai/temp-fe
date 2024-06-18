@@ -22,6 +22,21 @@ spec:
         image: cohenaj194/flask-test
         ports:
         - containerPort: 5000
+        # Datadog APM
+        env:
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: DD_ENV
+          value: "production"
+        - name: DD_SERVICE
+          value: "flask-test"
+        - name: DD_VERSION
+          value: "1.0"
+        - name: DD_LOGS_INJECTION
+          value: "true"
+
 ---
 apiVersion: v1
 kind: Service

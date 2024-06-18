@@ -17,8 +17,9 @@ from ddtrace import patch_all, tracer, config, Pin
 patch_all()
 
 # Initialize Datadog tracer
+DD_AGENT_HOST = os.getenv("DD_AGENT_HOST", "localhost")
 tracer.configure(
-    hostname="localhost",  # Replace with your Datadog agent hostname if different
+    hostname=DD_AGENT_HOST,  # Replace with your Datadog agent hostname if different
     port=8126,  # Replace with your Datadog agent port if different
 )
 
