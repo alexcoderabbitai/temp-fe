@@ -896,6 +896,10 @@ def bestdeals():
             del row["link"]
             row["link"] = link
 
+            link = row["exportLink"]
+            del row["exportLink"]
+            row["exportLink"] = link
+
         fieldnames = list(response[0].keys())
 
         return return_safe_html(
