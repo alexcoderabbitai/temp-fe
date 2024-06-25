@@ -1,6 +1,6 @@
 components: {}
 info:
-  title: temp-fe
+  title: saddlebagexchange-firing-range-app
   version: "0.1"
 openapi: 3.0.0
 paths:
@@ -11,7 +11,7 @@ paths:
         default:
           description: Default response
       x-name: root_GET
-      x-source: app.py~~77
+      x-source: app.py~~122
     head:
       operationId: root_HEAD
       responses:
@@ -32,8 +32,24 @@ paths:
         default:
           description: Default response
       x-name: root_POST
-      x-source: app.py~~77
+      x-source: app.py~~122
     x-name: root
+  /2faca366-0ef0-4acb-9acc-3808e0470952.txt:
+    get:
+      operationId: 2faca366-0ef0-4acb-9acc-3808e0470952.txt_GET
+      responses:
+        default:
+          description: Default response
+      x-name: 2faca366-0ef0-4acb-9acc-3808e0470952.txt_GET
+      x-source: app.py~~111
+    post:
+      operationId: 2faca366-0ef0-4acb-9acc-3808e0470952.txt_POST
+      responses:
+        default:
+          description: Default response
+      x-name: 2faca366-0ef0-4acb-9acc-3808e0470952.txt_POST
+      x-source: app.py~~111
+    x-name: 2faca366-0ef0-4acb-9acc-3808e0470952.txt
   /bestdeals:
     get:
       operationId: bestdeals_GET
@@ -81,7 +97,7 @@ paths:
         default:
           description: Default response
       x-name: bestdeals_GET
-      x-source: app.py~~791
+      x-source: app.py~~844
     post:
       operationId: bestdeals_POST
       requestBody:
@@ -128,7 +144,7 @@ paths:
         default:
           description: Default response
       x-name: bestdeals_POST
-      x-source: app.py~~791
+      x-source: app.py~~844
     x-name: bestdeals
   /favicon.ico:
     get:
@@ -137,14 +153,14 @@ paths:
         default:
           description: Default response
       x-name: favicon.ico_GET
-      x-source: app.py~~82
+      x-source: app.py~~127
     post:
       operationId: favicon.ico_POST
       responses:
         default:
           description: Default response
       x-name: favicon.ico_POST
-      x-source: app.py~~82
+      x-source: app.py~~127
     x-name: favicon.ico
   /ffxiv:
     get:
@@ -153,14 +169,14 @@ paths:
         default:
           description: Default response
       x-name: ffxiv_GET
-      x-source: app.py~~164
+      x-source: app.py~~209
     post:
       operationId: ffxiv_POST
       responses:
         default:
           description: Default response
       x-name: ffxiv_POST
-      x-source: app.py~~164
+      x-source: app.py~~209
     x-name: ffxiv
   /ffxiv_itemnames:
     get:
@@ -169,14 +185,14 @@ paths:
         default:
           description: Default response
       x-name: ffxiv_itemnames_GET
-      x-source: app.py~~174
+      x-source: app.py~~219
     post:
       operationId: ffxiv_itemnames_POST
       responses:
         default:
           description: Default response
       x-name: ffxiv_itemnames_POST
-      x-source: app.py~~174
+      x-source: app.py~~219
     x-name: ffxiv_itemnames
   /ffxivbestdeals:
     get:
@@ -225,7 +241,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivbestdeals_GET
-      x-source: app.py~~420
+      x-source: app.py~~465
     post:
       operationId: ffxivbestdeals_POST
       requestBody:
@@ -272,7 +288,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivbestdeals_POST
-      x-source: app.py~~420
+      x-source: app.py~~465
     x-name: ffxivbestdeals
   /ffxivcraftsim:
     get:
@@ -356,7 +372,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivcraftsim_GET
-      x-source: app.py~~248
+      x-source: app.py~~293
     post:
       operationId: ffxivcraftsim_POST
       requestBody:
@@ -438,7 +454,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivcraftsim_POST
-      x-source: app.py~~248
+      x-source: app.py~~293
     x-name: ffxivcraftsim
   /ffxivshoppinglist:
     get:
@@ -472,7 +488,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivshoppinglist_GET
-      x-source: app.py~~352
+      x-source: app.py~~397
     post:
       operationId: ffxivshoppinglist_POST
       requestBody:
@@ -504,7 +520,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivshoppinglist_POST
-      x-source: app.py~~352
+      x-source: app.py~~397
     x-name: ffxivshoppinglist
   /itemnames:
     get:
@@ -513,14 +529,14 @@ paths:
         default:
           description: Default response
       x-name: itemnames_GET
-      x-source: app.py~~521
+      x-source: app.py~~566
     post:
       operationId: itemnames_POST
       responses:
         default:
           description: Default response
       x-name: itemnames_POST
-      x-source: app.py~~521
+      x-source: app.py~~566
     x-name: itemnames
   /megaitemnames:
     get:
@@ -549,7 +565,7 @@ paths:
         default:
           description: Default response
       x-name: megaitemnames_GET
-      x-source: app.py~~544
+      x-source: app.py~~589
     post:
       operationId: megaitemnames_POST
       requestBody:
@@ -576,7 +592,7 @@ paths:
         default:
           description: Default response
       x-name: megaitemnames_POST
-      x-source: app.py~~544
+      x-source: app.py~~589
     x-name: megaitemnames
   /petexport:
     get:
@@ -630,7 +646,7 @@ paths:
         default:
           description: Default response
       x-name: petexport_GET
-      x-source: app.py~~671
+      x-source: app.py~~720
     post:
       operationId: petexport_POST
       requestBody:
@@ -682,7 +698,7 @@ paths:
         default:
           description: Default response
       x-name: petexport_POST
-      x-source: app.py~~671
+      x-source: app.py~~720
     x-name: petexport
   /petmarketshare:
     get:
@@ -721,7 +737,7 @@ paths:
         default:
           description: Default response
       x-name: petmarketshare_GET
-      x-source: app.py~~619
+      x-source: app.py~~666
     post:
       operationId: petmarketshare_POST
       requestBody:
@@ -758,7 +774,7 @@ paths:
         default:
           description: Default response
       x-name: petmarketshare_POST
-      x-source: app.py~~619
+      x-source: app.py~~666
     x-name: petmarketshare
   /petshoppinglist:
     get:
@@ -792,7 +808,7 @@ paths:
         default:
           description: Default response
       x-name: petshoppinglist_GET
-      x-source: app.py~~574
+      x-source: app.py~~619
     post:
       operationId: petshoppinglist_POST
       requestBody:
@@ -824,7 +840,7 @@ paths:
         default:
           description: Default response
       x-name: petshoppinglist_POST
-      x-source: app.py~~574
+      x-source: app.py~~619
     x-name: petshoppinglist
   /pricecheck:
     get:
@@ -848,7 +864,7 @@ paths:
         default:
           description: Default response
       x-name: pricecheck_GET
-      x-source: app.py~~204
+      x-source: app.py~~249
     post:
       operationId: pricecheck_POST
       requestBody:
@@ -870,7 +886,7 @@ paths:
         default:
           description: Default response
       x-name: pricecheck_POST
-      x-source: app.py~~204
+      x-source: app.py~~249
     x-name: pricecheck
   /regionundercut:
     get:
@@ -904,7 +920,7 @@ paths:
         default:
           description: Default response
       x-name: regionundercut_GET
-      x-source: app.py~~723
+      x-source: app.py~~774
     post:
       operationId: regionundercut_POST
       requestBody:
@@ -936,7 +952,7 @@ paths:
         default:
           description: Default response
       x-name: regionundercut_POST
-      x-source: app.py~~723
+      x-source: app.py~~774
     x-name: regionundercut
   /uploadtimers:
     get:
@@ -945,14 +961,14 @@ paths:
         default:
           description: Default response
       x-name: uploadtimers_GET
-      x-source: app.py~~483
+      x-source: app.py~~528
     post:
       operationId: uploadtimers_POST
       responses:
         default:
           description: Default response
       x-name: uploadtimers_POST
-      x-source: app.py~~483
+      x-source: app.py~~528
     x-name: uploadtimers
   /wow:
     get:
@@ -961,17 +977,15 @@ paths:
         default:
           description: Default response
       x-name: wow_GET
-      x-source: app.py~~169
+      x-source: app.py~~214
     post:
       operationId: wow_POST
       responses:
         default:
           description: Default response
       x-name: wow_POST
-      x-source: app.py~~169
+      x-source: app.py~~214
     x-name: wow
 servers:
 - description: Default server
-  # url: http://127.0.0.1:5000
-  # url: https://temp.saddlebagexchange.com/
   url: https://firing-range.saddlebagexchange.com/
