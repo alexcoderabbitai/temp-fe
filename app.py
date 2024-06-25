@@ -629,7 +629,7 @@ def petshoppinglist():
         }
 
         response = requests.post(
-            f"{api_url}/wow/shoppinglist",
+            f"{api_url}/wow/shoppinglistx",
             headers={"Accept": "application/json"},
             json=json_data,
         ).json()
@@ -735,7 +735,7 @@ def petexport():
         }
 
         response = requests.post(
-            f"{api_url}/wow/export",
+            f"{api_url}/wow/exportx",
             headers={"Accept": "application/json"},
             json=json_data,
         ).json()
