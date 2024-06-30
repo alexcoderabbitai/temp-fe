@@ -12,9 +12,12 @@ import requests, logging
 from lxml import html
 
 from ddtrace import patch_all, tracer, config, Pin
+from ddtrace.profiling import Profiler
 
 # Enable Datadog tracing
 patch_all()
+profiler = Profiler()
+profiler.start()
 
 # Initialize Datadog tracer
 DD_AGENT_HOST = os.getenv("DD_AGENT_HOST", "localhost")

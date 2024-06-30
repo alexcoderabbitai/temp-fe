@@ -36,7 +36,8 @@ spec:
           value: "1.0"
         - name: DD_LOGS_INJECTION
           value: "true"
-
+        - name: DD_PROFILING_ENABLED
+          value: "true"
 ---
 apiVersion: v1
 kind: Service
