@@ -1,4 +1,5 @@
 import json, os
+from datetime import datetime
 
 from flask import Flask, send_from_directory
 from flask import render_template, make_response
@@ -979,6 +980,52 @@ def petimport():
             results=response,
             fieldnames=fieldnames,
             len=len,
+        )
+
+
+@app.route("/ffxivsalehistory", methods=["GET", "POST"])
+def ffxivsalehistory():
+    if request.method == "GET":
+        return return_safe_html(render_template("ffxiv_sale_history.html"))
+    elif request.method == "POST":
+        # json_data = {
+        #     "home_server": request.form.get("home_server"),
+        #     "item_id": int(request.form.get("item_id")),
+        #     "initial_days": 7,
+        #     "end_days": 0,
+        #     "item_type": "all",
+        # }
+        region = request.form.get("region")
+        item_id = int(request.form.get("item_id"))
+        response = requests.get(
+            "https://universalis.app/api/v2/history/" + f"{region}/{item_id}"
+        ).json()
+
+        if "entries" not in response:
+            return "Error refresh the page or contact the devs on discord"
+        if len(response["entries"]) == 0:
+            return "Error no sales in past week"
+
+        fixed_response = []
+        for sale in response["entries"]:
+            sale["date"] = datetime.utcfromtimestamp(sale["timestamp"]).strftime(
+                "%Y-%m-%d %H:%M:%S"
+            )
+            for val in ["hq", "pricePerUnit", "quantity", "buyerName", "onMannequin", "worldID"]:
+                temp = sale[val]
+                del sale[val]
+                sale[val] = temp
+
+            fixed_response.append(sale)
+        fieldnames = list(fixed_response[0].keys())
+
+        return return_safe_html(
+            render_template(
+                "ffxiv_sale_history.html",
+                results=fixed_response,
+                fieldnames=fieldnames,
+                len=len,
+            )
         )
 
 
