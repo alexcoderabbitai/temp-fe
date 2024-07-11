@@ -11,7 +11,7 @@ paths:
         default:
           description: Default response
       x-name: root_GET
-      x-source: app.py~~122
+      x-source: app.py~~126
     head:
       operationId: root_HEAD
       responses:
@@ -32,7 +32,7 @@ paths:
         default:
           description: Default response
       x-name: root_POST
-      x-source: app.py~~122
+      x-source: app.py~~126
     x-name: root
   /2faca366-0ef0-4acb-9acc-3808e0470952.txt:
     get:
@@ -41,14 +41,14 @@ paths:
         default:
           description: Default response
       x-name: 2faca366-0ef0-4acb-9acc-3808e0470952.txt_GET
-      x-source: app.py~~111
+      x-source: app.py~~115
     post:
       operationId: 2faca366-0ef0-4acb-9acc-3808e0470952.txt_POST
       responses:
         default:
           description: Default response
       x-name: 2faca366-0ef0-4acb-9acc-3808e0470952.txt_POST
-      x-source: app.py~~111
+      x-source: app.py~~115
     x-name: 2faca366-0ef0-4acb-9acc-3808e0470952.txt
   /bestdeals:
     get:
@@ -97,7 +97,7 @@ paths:
         default:
           description: Default response
       x-name: bestdeals_GET
-      x-source: app.py~~844
+      x-source: app.py~~848
     post:
       operationId: bestdeals_POST
       requestBody:
@@ -144,7 +144,7 @@ paths:
         default:
           description: Default response
       x-name: bestdeals_POST
-      x-source: app.py~~844
+      x-source: app.py~~848
     x-name: bestdeals
   /favicon.ico:
     get:
@@ -153,14 +153,14 @@ paths:
         default:
           description: Default response
       x-name: favicon.ico_GET
-      x-source: app.py~~127
+      x-source: app.py~~131
     post:
       operationId: favicon.ico_POST
       responses:
         default:
           description: Default response
       x-name: favicon.ico_POST
-      x-source: app.py~~127
+      x-source: app.py~~131
     x-name: favicon.ico
   /ffxiv:
     get:
@@ -169,14 +169,14 @@ paths:
         default:
           description: Default response
       x-name: ffxiv_GET
-      x-source: app.py~~209
+      x-source: app.py~~213
     post:
       operationId: ffxiv_POST
       responses:
         default:
           description: Default response
       x-name: ffxiv_POST
-      x-source: app.py~~209
+      x-source: app.py~~213
     x-name: ffxiv
   /ffxiv_itemnames:
     get:
@@ -185,14 +185,14 @@ paths:
         default:
           description: Default response
       x-name: ffxiv_itemnames_GET
-      x-source: app.py~~219
+      x-source: app.py~~223
     post:
       operationId: ffxiv_itemnames_POST
       responses:
         default:
           description: Default response
       x-name: ffxiv_itemnames_POST
-      x-source: app.py~~219
+      x-source: app.py~~223
     x-name: ffxiv_itemnames
   /ffxivbestdeals:
     get:
@@ -241,7 +241,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivbestdeals_GET
-      x-source: app.py~~465
+      x-source: app.py~~469
     post:
       operationId: ffxivbestdeals_POST
       requestBody:
@@ -288,7 +288,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivbestdeals_POST
-      x-source: app.py~~465
+      x-source: app.py~~469
     x-name: ffxivbestdeals
   /ffxivcraftsim:
     get:
@@ -372,7 +372,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivcraftsim_GET
-      x-source: app.py~~293
+      x-source: app.py~~297
     post:
       operationId: ffxivcraftsim_POST
       requestBody:
@@ -454,8 +454,120 @@ paths:
         default:
           description: Default response
       x-name: ffxivcraftsim_POST
-      x-source: app.py~~293
+      x-source: app.py~~297
     x-name: ffxivcraftsim
+  # /ffxivsalehistory:
+  #   get:
+  #     operationId: ffxivsalehistory_GET
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             properties:
+  #               item_id:
+  #                 type: string
+  #                 x-field-kind: normal
+  #                 x-field-original-type: builtin.str
+  #                 x-field-type: string
+  #               region:
+  #                 type: string
+  #                 x-field-kind: normal
+  #                 x-field-original-type: builtin.str
+  #                 x-field-type: string
+  #             type: object
+  #             x-field-kind: normal
+  #             x-field-original-type: object
+  #             x-field-type: object
+  #       x-code: ""
+  #     responses:
+  #       default:
+  #         description: Default response
+  #     x-name: ffxivsalehistory_GET
+  #     x-source: app.py~~986
+  #   post:
+  #     operationId: ffxivsalehistory_POST
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             properties:
+  #               item_id:
+  #                 type: string
+  #                 x-field-kind: normal
+  #                 x-field-original-type: builtin.str
+  #                 x-field-type: string
+  #               region:
+  #                 type: string
+  #                 x-field-kind: normal
+  #                 x-field-original-type: builtin.str
+  #                 x-field-type: string
+  #             type: object
+  #             x-field-kind: normal
+  #             x-field-original-type: object
+  #             x-field-type: object
+  #       x-code: ""
+  #     responses:
+  #       default:
+  #         description: Default response
+  #     x-name: ffxivsalehistory_POST
+  #     x-source: app.py~~986
+  #   x-name: ffxivsalehistory
+  /ffxivscripexchange:
+    get:
+      operationId: ffxivscripexchange_GET
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                color:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                home_server:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+              type: object
+              x-field-kind: normal
+              x-field-original-type: object
+              x-field-type: object
+        x-code: ""
+      responses:
+        default:
+          description: Default response
+      x-name: ffxivscripexchange_GET
+      x-source: app.py~~1039
+    post:
+      operationId: ffxivscripexchange_POST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                color:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                home_server:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+              type: object
+              x-field-kind: normal
+              x-field-original-type: object
+              x-field-type: object
+        x-code: ""
+      responses:
+        default:
+          description: Default response
+      x-name: ffxivscripexchange_POST
+      x-source: app.py~~1039
+    x-name: ffxivscripexchange
   /ffxivshoppinglist:
     get:
       operationId: ffxivshoppinglist_GET
@@ -488,7 +600,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivshoppinglist_GET
-      x-source: app.py~~397
+      x-source: app.py~~401
     post:
       operationId: ffxivshoppinglist_POST
       requestBody:
@@ -520,7 +632,7 @@ paths:
         default:
           description: Default response
       x-name: ffxivshoppinglist_POST
-      x-source: app.py~~397
+      x-source: app.py~~401
     x-name: ffxivshoppinglist
   /itemnames:
     get:
@@ -529,14 +641,14 @@ paths:
         default:
           description: Default response
       x-name: itemnames_GET
-      x-source: app.py~~566
+      x-source: app.py~~570
     post:
       operationId: itemnames_POST
       responses:
         default:
           description: Default response
       x-name: itemnames_POST
-      x-source: app.py~~566
+      x-source: app.py~~570
     x-name: itemnames
   /megaitemnames:
     get:
@@ -565,7 +677,7 @@ paths:
         default:
           description: Default response
       x-name: megaitemnames_GET
-      x-source: app.py~~589
+      x-source: app.py~~593
     post:
       operationId: megaitemnames_POST
       requestBody:
@@ -592,7 +704,7 @@ paths:
         default:
           description: Default response
       x-name: megaitemnames_POST
-      x-source: app.py~~589
+      x-source: app.py~~593
     x-name: megaitemnames
   /petexport:
     get:
@@ -646,7 +758,7 @@ paths:
         default:
           description: Default response
       x-name: petexport_GET
-      x-source: app.py~~720
+      x-source: app.py~~724
     post:
       operationId: petexport_POST
       requestBody:
@@ -698,8 +810,124 @@ paths:
         default:
           description: Default response
       x-name: petexport_POST
-      x-source: app.py~~720
+      x-source: app.py~~724
     x-name: petexport
+  /petimport:
+    get:
+      operationId: petimport_GET
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                ROI:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                avgPrice:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                homeRealmID:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                maxPurchasePrice:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                petsOnly:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                profitAmount:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                region:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                salesPerDay:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+              type: object
+              x-field-kind: normal
+              x-field-original-type: object
+              x-field-type: object
+        x-code: ""
+      responses:
+        default:
+          description: Default response
+      x-name: petimport_GET
+      x-source: app.py~~919
+    post:
+      operationId: petimport_POST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                ROI:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                avgPrice:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                homeRealmID:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                maxPurchasePrice:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                petsOnly:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                profitAmount:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                region:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+                salesPerDay:
+                  type: string
+                  x-field-kind: normal
+                  x-field-original-type: builtin.str
+                  x-field-type: string
+              type: object
+              x-field-kind: normal
+              x-field-original-type: object
+              x-field-type: object
+        x-code: ""
+      responses:
+        default:
+          description: Default response
+      x-name: petimport_POST
+      x-source: app.py~~919
+    x-name: petimport
   /petmarketshare:
     get:
       operationId: petmarketshare_GET
@@ -737,7 +965,7 @@ paths:
         default:
           description: Default response
       x-name: petmarketshare_GET
-      x-source: app.py~~666
+      x-source: app.py~~670
     post:
       operationId: petmarketshare_POST
       requestBody:
@@ -774,7 +1002,7 @@ paths:
         default:
           description: Default response
       x-name: petmarketshare_POST
-      x-source: app.py~~666
+      x-source: app.py~~670
     x-name: petmarketshare
   /petshoppinglist:
     get:
@@ -808,7 +1036,7 @@ paths:
         default:
           description: Default response
       x-name: petshoppinglist_GET
-      x-source: app.py~~619
+      x-source: app.py~~623
     post:
       operationId: petshoppinglist_POST
       requestBody:
@@ -840,7 +1068,7 @@ paths:
         default:
           description: Default response
       x-name: petshoppinglist_POST
-      x-source: app.py~~619
+      x-source: app.py~~623
     x-name: petshoppinglist
   /pricecheck:
     get:
@@ -864,7 +1092,7 @@ paths:
         default:
           description: Default response
       x-name: pricecheck_GET
-      x-source: app.py~~249
+      x-source: app.py~~253
     post:
       operationId: pricecheck_POST
       requestBody:
@@ -886,7 +1114,7 @@ paths:
         default:
           description: Default response
       x-name: pricecheck_POST
-      x-source: app.py~~249
+      x-source: app.py~~253
     x-name: pricecheck
   /regionundercut:
     get:
@@ -920,7 +1148,7 @@ paths:
         default:
           description: Default response
       x-name: regionundercut_GET
-      x-source: app.py~~774
+      x-source: app.py~~778
     post:
       operationId: regionundercut_POST
       requestBody:
@@ -952,7 +1180,7 @@ paths:
         default:
           description: Default response
       x-name: regionundercut_POST
-      x-source: app.py~~774
+      x-source: app.py~~778
     x-name: regionundercut
   /uploadtimers:
     get:
@@ -961,14 +1189,14 @@ paths:
         default:
           description: Default response
       x-name: uploadtimers_GET
-      x-source: app.py~~528
+      x-source: app.py~~532
     post:
       operationId: uploadtimers_POST
       responses:
         default:
           description: Default response
       x-name: uploadtimers_POST
-      x-source: app.py~~528
+      x-source: app.py~~532
     x-name: uploadtimers
   /wow:
     get:
@@ -977,14 +1205,14 @@ paths:
         default:
           description: Default response
       x-name: wow_GET
-      x-source: app.py~~214
+      x-source: app.py~~218
     post:
       operationId: wow_POST
       responses:
         default:
           description: Default response
       x-name: wow_POST
-      x-source: app.py~~214
+      x-source: app.py~~218
     x-name: wow
 servers:
 - description: Default server
