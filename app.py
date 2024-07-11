@@ -1011,7 +1011,14 @@ def ffxivsalehistory():
             sale["date"] = datetime.utcfromtimestamp(sale["timestamp"]).strftime(
                 "%Y-%m-%d %H:%M:%S"
             )
-            for val in ["hq", "pricePerUnit", "quantity", "buyerName", "onMannequin", "worldID"]:
+            for val in [
+                "hq",
+                "pricePerUnit",
+                "quantity",
+                "buyerName",
+                "onMannequin",
+                "worldID",
+            ]:
                 temp = sale[val]
                 del sale[val]
                 sale[val] = temp
@@ -1023,6 +1030,39 @@ def ffxivsalehistory():
             render_template(
                 "ffxiv_sale_history.html",
                 results=fixed_response,
+                fieldnames=fieldnames,
+                len=len,
+            )
+        )
+
+
+@app.route("/ffxivscripexchange", methods=["GET", "POST"])
+def ffxiv_scrip_exchange():
+    if request.method == "GET":
+        return return_safe_html(render_template("ffxiv_scrip_exchange.html"))
+    elif request.method == "POST":
+        json_data = {
+            "home_server": request.form.get("home_server"),
+            "color": request.form.get("color"),
+        }
+
+        response = requests.post(
+            f"{api_url}/ffxiv/scripexchange",
+            headers={"Accept": "application/json"},
+            json=json_data,
+        ).json()
+
+        if "data" not in response:
+            return "Error refresh the page or contact the devs on discord"
+        if len(response["data"]) == 0:
+            return "Error no sales in past week"
+
+        fieldnames = list(response["data"][0].keys())
+
+        return return_safe_html(
+            render_template(
+                "ffxiv_scrip_exchange.html",
+                results=response["data"],
                 fieldnames=fieldnames,
                 len=len,
             )
