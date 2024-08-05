@@ -3,9 +3,9 @@ name: Restart temp-fe Deployment on Staging
 # Defines when the workflow should run
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 
 # Defines the jobs to run
 jobs:
@@ -29,4 +29,4 @@ jobs:
         export KUBECONFIG=$(pwd)/kubeconfig
 
     - name: Rollout Restart Deployment
-      run: kubectl rollout restart deployment temp-fe --kubeconfig kubeconfig
+      run: kubectl rollout restart deployment flask-test --kubeconfig kubeconfig
