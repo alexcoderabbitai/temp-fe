@@ -943,7 +943,7 @@ def petimport():
         }
 
         response = requests.post(
-            "http://api.saddlebagexchange.com/api/wow/import",
+            f"{api_url}/api/wow/import",
             headers=headers,
             json=json_data,
         ).json()
