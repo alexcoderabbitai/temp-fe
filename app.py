@@ -123,6 +123,16 @@ def probely():
     # return "Probely"
 
 
+@app.route("/gitlab", methods=["GET", "POST"])
+def gitlab():
+    return Response(
+        "a8f90252-4e3a-488d-be6e-584993462fe1",
+        headers={
+            "Content-Disposition": "attachment; filename=GitLab-DAST-Site-Validation-a8f90252-4e3a-488d-be6e-584993462fe1.txt"
+        },
+    )
+
+
 @app.route("/", methods=["GET", "POST"])
 def root():
     return return_safe_html(render_template("index.html", len=len))
