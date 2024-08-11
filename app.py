@@ -123,7 +123,7 @@ def probely():
     # return "Probely"
 
 
-@app.route("/gitlab", methods=["GET", "POST"])
+@app.route("/GitLab-DAST-Site-Validation-a8f90252-4e3a-488d-be6e-584993462fe1.txt", methods=["GET", "POST"])
 def gitlab():
     return Response(
         "a8f90252-4e3a-488d-be6e-584993462fe1",
