@@ -123,7 +123,10 @@ def probely():
     # return "Probely"
 
 
-@app.route("/GitLab-DAST-Site-Validation-a8f90252-4e3a-488d-be6e-584993462fe1.txt", methods=["GET", "POST"])
+@app.route(
+    "/GitLab-DAST-Site-Validation-a8f90252-4e3a-488d-be6e-584993462fe1.txt",
+    methods=["GET", "POST"],
+)
 def gitlab():
     return Response(
         "a8f90252-4e3a-488d-be6e-584993462fe1",
@@ -131,6 +134,13 @@ def gitlab():
             "Content-Disposition": "attachment; filename=GitLab-DAST-Site-Validation-a8f90252-4e3a-488d-be6e-584993462fe1.txt"
         },
     )
+
+
+@app.route("/openapi-spec.json", methods=["GET", "POST"])
+def openapispec():
+    with open("openapi-spec.json", "r") as file:
+        content = file.read()
+    return content
 
 
 @app.route("/", methods=["GET", "POST"])
