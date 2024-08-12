@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements.in
 #
-attrs==23.2.0
+attrs==24.2.0
     # via
     #   cattrs
     #   ddtrace
@@ -14,7 +14,7 @@ bytecode==0.15.1
     # via ddtrace
 cattrs==23.2.3
     # via ddtrace
-certifi==2024.6.2
+certifi==2024.7.4
     # via requests
 charset-normalizer==3.3.2
     # via requests
@@ -22,13 +22,13 @@ click==8.1.7
     # via flask
 ddsketch==3.0.1
     # via ddtrace
-ddtrace==2.9.1
+ddtrace==2.10.4
     # via -r requirements.in
 deprecated==1.2.14
     # via
     #   limits
     #   opentelemetry-api
-envier==0.5.1
+envier==0.5.2
     # via ddtrace
 flask==3.0.3
     # via
@@ -37,11 +37,11 @@ flask==3.0.3
     #   flask-limiter
 flask-cors==4.0.1
     # via -r requirements.in
-flask-limiter==3.7.0
+flask-limiter==3.8.0
     # via -r requirements.in
 idna==3.7
     # via requests
-importlib-metadata==7.1.0
+importlib-metadata==8.0.0
     # via opentelemetry-api
 importlib-resources==6.4.0
     # via limits
@@ -49,9 +49,9 @@ itsdangerous==2.2.0
     # via flask
 jinja2==3.1.4
     # via flask
-limits==3.12.0
+limits==3.13.0
     # via flask-limiter
-lxml==5.2.2
+lxml==5.3.0
     # via -r requirements.in
 markdown-it-py==3.0.0
     # via rich
@@ -61,13 +61,13 @@ markupsafe==2.1.5
     #   werkzeug
 mdurl==0.1.2
     # via markdown-it-py
-opentelemetry-api==1.25.0
+opentelemetry-api==1.26.0
     # via ddtrace
 ordered-set==4.1.0
     # via flask-limiter
 packaging==24.1
     # via limits
-protobuf==5.27.1
+protobuf==5.27.3
     # via ddtrace
 pygments==2.18.0
     # via rich
@@ -92,5 +92,5 @@ wrapt==1.16.0
     # via deprecated
 xmltodict==0.13.0
     # via ddtrace
-zipp==3.19.2
+zipp==3.20.0
     # via importlib-metadata
