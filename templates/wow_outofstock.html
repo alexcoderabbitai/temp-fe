@@ -1,0 +1,119 @@
+{% autoescape true %}
+{% include '_header.html' %}
+<link rel="canonical" href="https://temp.saddlebagexchange.com/wowoutofstock">
+
+<body>
+  {% include '_navbar.html' %}
+  <div class="container-fluid">
+    <h1>WoW Out of Stock Items</h1>
+    <div class="alert alert-info" role="alert">
+      Check items that are out of stock across realms.
+    </div>
+    <div class="mt-4">
+      {% if request.method == 'POST'%}
+        <table id="resultsTable" class="display table table-striped table-hover nowrap responsive" style="width: 100%">
+          <thead>
+            <tr>
+              {% for header in results[0].keys() %}
+                <th>{{header}}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in results %}
+              <tr>
+                {% for index in range(0, len(fieldnames)) %}
+                  <td>{{row[fieldnames[index]]}}</td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </div>
+    <form method="POST" action="/wowoutofstock" class="scanform">
+      <hr>
+        <div class="mb-3">
+          <label class="form-label">Region</label>
+          <select class="form-select" name="region">
+            <option value="NA" selected>NA</option>
+            <option value="EU">EU</option>
+          </select>
+          <div class="form-text">Select the region you are interested in.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Sales Per Day</label>
+          <input class="form-control" name="salesPerDay" type="number" step="0.01" value="0.2" required>
+          <div class="form-text">Enter the average sales per day. Default is 0.2.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Average Price</label>
+          <input class="form-control" name="avgPrice" type="number" value="1000" required>
+          <div class="form-text">Enter the average price of the item. Default is 1000.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Minimum Market Value</label>
+          <input class="form-control" name="minMarketValue" type="number" value="100000" required>
+          <div class="form-text">Specify the minimum market value. Default is 100000.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Population WP</label>
+          <input class="form-control" name="populationWP" type="number" value="3000" required>
+          <div class="form-text">Enter the World Population metric. Default is 3000.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Population Blizz</label>
+          <input class="form-control" name="populationBlizz" type="number" value="1" required>
+          <div class="form-text">Enter the Blizzard Population metric. Default is 1.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Ranking WP</label>
+          <input class="form-control" name="rankingWP" type="number" value="90" required>
+          <div class="form-text">Enter the World Population ranking. Default is 90.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Item Category</label>
+          <select class="form-select" id="item_class" name="item_class">
+            <option value="-1" selected>All</option>
+            <option value="0">Consumable</option>
+            <option value="1">Container</option>
+            <option value="2">Weapon</option>
+            <option value="3">Gem</option>
+            <option value="4">Armor</option>
+            <option value="7">Tradegoods</option>
+            <option value="8">Item Enhancement</option>
+            <option value="9">Recipe</option>
+            <option value="12">Quest Item</option>
+            <option value="15">Miscellaneous</option>
+            <option value="16">Glyph</option>
+            <option value="17">Battle Pet</option>
+            <option value="19">Profession</option>
+          </select>
+          <div class="form-text">Pick a category. Default is All.</div>
+        </div>
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $('#resultsTable').DataTable();
+    });
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7398832994051812"
+   crossorigin="anonymous"></script>
+</body>
+<script type="text/javascript">
+  // Convert specific columns in #resultsTable into clickable <a> tags
+  $('#resultsTable').DataTable({
+    "columnDefs": [
+      {
+        "targets": [8, 9], // Adjust these indices based on your table's structure
+        "render": function (data, type, row) {
+          return '<a href="' + data + '" target="_blank">' + data + '</a>';
+        }
+      }
+    ]
+  });
+</script>
+</html>
+{% endautoescape %}
