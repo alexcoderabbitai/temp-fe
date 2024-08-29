@@ -30,26 +30,26 @@ jobs:
           push: true
           tags: cohenaj194/flask-test
 
-  # push container
-  restart-deployment:
-    runs-on: ubuntu-latest # Specifies the runner environment
-    needs: docker
+  # # push container
+  # restart-deployment:
+  #   runs-on: ubuntu-latest # Specifies the runner environment
+  #   needs: docker
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2 # Checks out your repository under $GITHUB_WORKSPACE
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v2 # Checks out your repository under $GITHUB_WORKSPACE
 
-    - name: Set up Kubectl
-      uses: azure/setup-kubectl@v3 # Updated to version 3 to fix the vulnerability
-      with:
-        version: 'v1.20.0' # Specify the version of kubectl you want to use
+  #   - name: Set up Kubectl
+  #     uses: azure/setup-kubectl@v3 # Updated to version 3 to fix the vulnerability
+  #     with:
+  #       version: 'v1.20.0' # Specify the version of kubectl you want to use
 
-    - name: Configure Kubeconfig
-      env:
-        KUBECONFIG_STAGING: ${{ secrets.KUBECONFIG_STAGING }} # Uses the secret encoded in base64
-      run: |
-        echo "$KUBECONFIG_STAGING" | base64 -d > kubeconfig
-        export KUBECONFIG=$(pwd)/kubeconfig
+  #   - name: Configure Kubeconfig
+  #     env:
+  #       KUBECONFIG_STAGING: ${{ secrets.KUBECONFIG_STAGING }} # Uses the secret encoded in base64
+  #     run: |
+  #       echo "$KUBECONFIG_STAGING" | base64 -d > kubeconfig
+  #       export KUBECONFIG=$(pwd)/kubeconfig
 
-    - name: Rollout Restart Deployment
-      run: kubectl rollout restart deployment flask-test --kubeconfig kubeconfig
+  #   - name: Rollout Restart Deployment
+  #     run: kubectl rollout restart deployment flask-test --kubeconfig kubeconfig
