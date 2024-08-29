@@ -40,7 +40,7 @@ jobs:
       uses: actions/checkout@v2 # Checks out your repository under $GITHUB_WORKSPACE
 
     - name: Set up Kubectl
-      uses: azure/setup-kubectl@v1 # Sets up kubectl CLI
+      uses: azure/setup-kubectl@v3 # Updated to version 3 to fix the vulnerability
       with:
         version: 'v1.20.0' # Specify the version of kubectl you want to use
 
