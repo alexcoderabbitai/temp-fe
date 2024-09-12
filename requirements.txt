@@ -4,25 +4,17 @@
 #
 #    pip-compile requirements.in
 #
-attrs==24.2.0
-    # via
-    #   cattrs
-    #   ddtrace
 blinker==1.8.2
     # via flask
 bytecode==0.15.1
     # via ddtrace
-cattrs==23.2.3
-    # via ddtrace
-certifi==2024.7.4
+certifi==2024.8.30
     # via requests
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
     # via flask
-ddsketch==3.0.1
-    # via ddtrace
-ddtrace==2.10.4
+ddtrace==2.12.2
     # via -r requirements.in
 deprecated==1.2.14
     # via
@@ -35,15 +27,15 @@ flask==3.0.3
     #   -r requirements.in
     #   flask-cors
     #   flask-limiter
-flask-cors==4.0.1
+flask-cors==5.0.0
     # via -r requirements.in
 flask-limiter==3.8.0
     # via -r requirements.in
-idna==3.7
+idna==3.8
     # via requests
-importlib-metadata==8.0.0
+importlib-metadata==8.4.0
     # via opentelemetry-api
-importlib-resources==6.4.0
+importlib-resources==6.4.5
     # via limits
 itsdangerous==2.2.0
     # via flask
@@ -61,36 +53,34 @@ markupsafe==2.1.5
     #   werkzeug
 mdurl==0.1.2
     # via markdown-it-py
-opentelemetry-api==1.26.0
+opentelemetry-api==1.27.0
     # via ddtrace
 ordered-set==4.1.0
     # via flask-limiter
 packaging==24.1
     # via limits
-protobuf==5.27.3
+protobuf==5.28.1
     # via ddtrace
 pygments==2.18.0
     # via rich
 requests==2.32.3
     # via -r requirements.in
-rich==13.7.1
+rich==13.8.1
     # via flask-limiter
-six==1.16.0
-    # via
-    #   ddsketch
-    #   ddtrace
 typing-extensions==4.12.2
     # via
     #   ddtrace
     #   flask-limiter
     #   limits
-urllib3==2.2.2
+urllib3==2.2.3
     # via requests
-werkzeug==3.0.3
+werkzeug==3.0.4
     # via flask
 wrapt==1.16.0
-    # via deprecated
+    # via
+    #   ddtrace
+    #   deprecated
 xmltodict==0.13.0
     # via ddtrace
-zipp==3.20.0
+zipp==3.20.1
     # via importlib-metadata

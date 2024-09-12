@@ -5,6 +5,7 @@ from flask import Flask, send_from_directory
 from flask import render_template, make_response
 from flask import request
 from flask import jsonify, Response
+from flask import redirect
 
 from flask_cors import CORS
 from flask_limiter import Limiter
@@ -272,6 +273,9 @@ def ffxivitemnames():
 # }
 @app.route("/pricecheck", methods=["GET", "POST"])
 def ffxiv_pricecheck():
+    return redirect("https://saddlebagexchange.com/price-sniper")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("ffxiv_pricecheck.html"))
     elif request.method == "POST":
@@ -316,6 +320,9 @@ def ffxiv_pricecheck():
 
 @app.route("/ffxivcraftsim", methods=["GET", "POST"])
 def ffxivcraftsim():
+    return redirect("https://saddlebagexchange.com/ffxiv/craftsim/queries")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("ffxiv_craftsim.html"))
     elif request.method == "POST":
@@ -420,6 +427,9 @@ def craftsim_results_table(craftsim_results, html_file_name, json_data={}):
 
 @app.route("/ffxivshoppinglist", methods=["GET", "POST"])
 def ffxiv_shopping_list():
+    return redirect("https://saddlebagexchange.com/ffxiv/shopping-list")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("ffxiv_shoppinglist.html"))
     elif request.method == "POST":
@@ -551,6 +561,9 @@ def ffxivbestdeals():
 #### WOW ####
 @app.route("/uploadtimers", methods=["GET", "POST"])
 def uploadtimers():
+    return redirect("https://saddlebagexchange.com/wow/upload-timers")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("uploadtimers.html"))
     elif request.method == "POST":
@@ -642,6 +655,9 @@ def megaitemnames():
 
 @app.route("/petshoppinglist", methods=["GET", "POST"])
 def petshoppinglist():
+    return redirect("https://saddlebagexchange.com/wow/shopping-list")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("petshoppinglist.html"))
     elif request.method == "POST":
@@ -689,6 +705,9 @@ def petshoppinglist():
 
 @app.route("/petmarketshare", methods=["GET", "POST"])
 def petmarketshare():
+    return redirect("https://saddlebagexchange.com/wow/pet-marketshare")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("petmarketshare.html"))
     elif request.method == "POST":
@@ -743,6 +762,9 @@ def petmarketshare():
 
 @app.route("/petexport", methods=["GET", "POST"])
 def petexport():
+    return redirect("https://saddlebagexchange.com/wow/export-search")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("petexport.html"))
     elif request.method == "POST":
@@ -797,6 +819,9 @@ def petexport():
 
 @app.route("/regionundercut", methods=["GET", "POST"])
 def regionundercut():
+    return redirect("https://saddlebagexchange.com/wow/region-undercut")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("regionundercut.html"))
     elif request.method == "POST":
@@ -867,6 +892,9 @@ def regionundercut():
 
 @app.route("/bestdeals", methods=["GET", "POST"])
 def bestdeals():
+    return redirect("https://saddlebagexchange.com/wow/best-deals/recommended")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("bestdeals.html"))
     elif request.method == "POST":
@@ -1062,6 +1090,9 @@ def petimport():
 
 @app.route("/ffxivsalehistory", methods=["GET", "POST"])
 def ffxivsalehistory():
+    return redirect("https://saddlebagexchange.com/ffxiv/extended-history")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("ffxiv_sale_history.html"))
     elif request.method == "POST":
@@ -1115,6 +1146,9 @@ def ffxivsalehistory():
 
 @app.route("/ffxivscripexchange", methods=["GET", "POST"])
 def ffxiv_scrip_exchange():
+    return redirect("https://saddlebagexchange.com/ffxiv/scrip-exchange")
+
+    # DEPRECIATED
     if request.method == "GET":
         return return_safe_html(render_template("ffxiv_scrip_exchange.html"))
     elif request.method == "POST":
