@@ -10,11 +10,11 @@ bytecode==0.15.1
     # via ddtrace
 certifi==2024.8.30
     # via requests
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via flask
-ddtrace==2.12.2
+ddtrace==2.14.2
     # via -r requirements.in
 deprecated==1.2.14
     # via
@@ -31,7 +31,7 @@ flask-cors==5.0.0
     # via -r requirements.in
 flask-limiter==3.8.0
     # via -r requirements.in
-idna==3.8
+idna==3.10
     # via requests
 importlib-metadata==8.4.0
     # via opentelemetry-api
@@ -47,7 +47,7 @@ lxml==5.3.0
     # via -r requirements.in
 markdown-it-py==3.0.0
     # via rich
-markupsafe==2.1.5
+markupsafe==3.0.1
     # via
     #   jinja2
     #   werkzeug
@@ -59,13 +59,13 @@ ordered-set==4.1.0
     # via flask-limiter
 packaging==24.1
     # via limits
-protobuf==5.28.1
+protobuf==5.28.2
     # via ddtrace
 pygments==2.18.0
     # via rich
 requests==2.32.3
     # via -r requirements.in
-rich==13.8.1
+rich==13.9.2
     # via flask-limiter
 typing-extensions==4.12.2
     # via
@@ -80,7 +80,7 @@ wrapt==1.16.0
     # via
     #   ddtrace
     #   deprecated
-xmltodict==0.13.0
+xmltodict==0.14.1
     # via ddtrace
-zipp==3.20.1
+zipp==3.20.2
     # via importlib-metadata

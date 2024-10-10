@@ -1,20 +1,23 @@
 import json, os
 from datetime import datetime
 
-from flask import Flask, send_from_directory
-from flask import render_template, make_response
+from flask import Flask
+from flask import render_template
 from flask import request
-from flask import jsonify, Response
 from flask import redirect
 
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import requests, logging
-from lxml import html
 
 from ddtrace import patch_all, tracer, config, Pin
 from ddtrace.profiling import Profiler
+
+from routes.ffxiv import ffxiv_bp
+from routes.general import general_bp
+from routes.wow import wow_bp
+from utils.security import add_security_headers, return_safe_html
 
 # Enable Datadog tracing
 patch_all()
@@ -96,226 +99,16 @@ custom_handler = CustomLogHandler()
 app.logger.addHandler(custom_handler)
 
 
-def str_to_bool(bool_str):
-    if bool_str == "True":
-        return True
-    else:
-        return False
+# Register blueprints to add routes
+app.register_blueprint(wow_bp)
+app.register_blueprint(ffxiv_bp)
+app.register_blueprint(general_bp)
 
 
-def return_safe_html(input_string):
-    # disable for security testing
-    if NO_RATE_LIMIT:
-        return input_string
-    document_root = html.fromstring(input_string)
-    cleaned_html = html.tostring(document_root, pretty_print=True)
-    # if `cleaned_html` differs from `input_string`, the input may contain malicious content.
-    return cleaned_html
-
-
-@app.route("/2faca366-0ef0-4acb-9acc-3808e0470952.txt", methods=["GET", "POST"])
-def probely():
-    return Response(
-        "Probely",
-        headers={
-            "Content-Disposition": "attachment; filename=2faca366-0ef0-4acb-9acc-3808e0470952.txt"
-        },
-    )
-    # return "Probely"
-
-
-@app.route(
-    "/GitLab-DAST-Site-Validation-a8f90252-4e3a-488d-be6e-584993462fe1.txt",
-    methods=["GET", "POST"],
-)
-def gitlab():
-    return Response(
-        "a8f90252-4e3a-488d-be6e-584993462fe1",
-        headers={
-            "Content-Disposition": "attachment; filename=GitLab-DAST-Site-Validation-a8f90252-4e3a-488d-be6e-584993462fe1.txt"
-        },
-    )
-
-
-@app.route("/openapi-spec.json", methods=["GET", "POST"])
-def openapispec():
-    with open("openapi-spec.json", "r") as file:
-        content = file.read()
-    return content
-
-
-@app.route("/", methods=["GET", "POST"])
-def root():
-    return return_safe_html(render_template("index.html", len=len))
-
-
-@app.route("/favicon.ico", methods=["GET", "POST"])
-def favicon():
-    return send_from_directory("templates", "chocobo.png")
-
-
+# Use add_security_headers from utils/security.py
 @app.after_request
-def add_security_headers(response):
-    # Add security headers to the response
-    csp_policy = {
-        "default-src": ["'self'"],
-        "script-src": [
-            "'self'",
-            "'unsafe-inline'",
-            "https://code.jquery.com",
-            "https://cdn.jsdelivr.net",
-            "https://pagead2.googlesyndication.com",
-            "cdn.datatables.net",
-            "cdnjs.cloudflare.com",
-            "www.googletagmanager.com",
-            "partner.googleadservices.com",
-            "tpc.googlesyndication.com",
-        ],
-        "style-src": [
-            "'self'",
-            "'unsafe-inline'",
-            "https://cdn.jsdelivr.net",
-            "cdn.datatables.net",
-            "fonts.googleapis.com",
-        ],
-        "img-src": [
-            "'self'",
-            "data:",
-            "https://pagead2.googlesyndication.com",
-            "https://saddlebagexchange.com",
-        ],
-        "font-src": [
-            "'self'",
-            "fonts.gstatic.com",
-        ],
-        "connect-src": [
-            "'self'",
-            "pagead2.googlesyndication.com",
-            "www.google-analytics.com",
-        ],
-        "frame-src": [
-            "'self'",
-            "https://www.youtube.com",
-            "googleads.g.doubleclick.net",
-            "tpc.googlesyndication.com",
-            "www.google.com",
-        ],
-    }
-    csp_header_value = "; ".join(
-        [f"{key} {' '.join(value)}" for key, value in csp_policy.items()]
-    )
-    response.headers["Content-Security-Policy"] = csp_header_value
-    # Add other security headers
-    response.headers["X-Frame-Options"] = "same-origin"
-    response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["Strict-Transport-Security"] = (
-        "max-age=31536000; includeSubDomains;"
-    )
-    response.headers["Referrer-Policy"] = "no-referrer-when-downgrade"
-    response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
-    response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
-    response.headers["X-XSS-Protection"] = "0; mode=block"
-
-    response.headers["Content-Security-Policy-Report-Only"] = (
-        "default-src 'self'; script-src 'self' https://cdn.example.com; style-src 'self' https://cdn.example.com; img-src 'self' data: https://cdn.example.com;"
-    )
-    ## this is causing issues remove from the sting above
-    # report-uri /csp-report-endpoint;
-
-    response.headers["Permissions-Policy"] = (
-        "geolocation=(), camera=(), microphone=(), fullscreen=(), autoplay=(), payment=(), encrypted-media=(), midi=(), accelerometer=(), gyroscope=(), magnetometer=()"
-    )
-
-    # this one breaks the tiny chocobo icon
-    # response.headers["Cross-Origin-Embedder-Policy"] = "require-corp"
-    return response
-
-
-@app.route("/ffxiv", methods=["GET", "POST"])
-def ffxiv():
-    return return_safe_html(render_template("ffxiv_index.html", len=len))
-
-
-@app.route("/wow", methods=["GET", "POST"])
-def wow():
-    return return_safe_html(render_template("wow_index.html", len=len))
-
-
-@app.route("/ffxiv_itemnames", methods=["GET", "POST"])
-def ffxivitemnames():
-    if request.method == "GET":
-        return return_safe_html(render_template("ffxiv_itemnames.html"))
-    elif request.method == "POST":
-        raw_items_names = requests.get(
-            "https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/libs/data/src/lib/json/items.json"
-        ).json()
-        item_ids = requests.get("https://universalis.app/api/marketable").json()
-
-        resp_list = []
-        for id in item_ids:
-            resp_list.append({"id": id, "name": raw_items_names[str(id)]["en"]})
-
-        return return_safe_html(
-            render_template(
-                "ffxiv_itemnames.html",
-                results=resp_list,
-                fieldnames=["id", "name"],
-                len=len,
-            )
-        )
-
-
-# {
-#   "home_server": "Famfrit",
-#   "user_auctions": [
-#     { "itemID": 4745, "price": 100, "desired_state": "below", "hq": true }
-#   ]
-# }
-@app.route("/pricecheck", methods=["GET", "POST"])
-def ffxiv_pricecheck():
-    return redirect("https://saddlebagexchange.com/price-sniper")
-
-    # DEPRECIATED
-    if request.method == "GET":
-        return return_safe_html(render_template("ffxiv_pricecheck.html"))
-    elif request.method == "POST":
-        json_data = json.loads(request.form.get("jsonData"))
-        response = requests.post(
-            f"{api_url}/pricecheck",
-            headers={"Accept": "application/json"},
-            json=json_data,
-        ).json()
-
-        if "matching" not in response:
-            return "Error no matching data"
-        if len(response["matching"]) == 0:
-            return "Error no matching data"
-
-        fixed_response = []
-        for row in response["matching"]:
-            fixed_response.append(
-                {
-                    "minPrice": row["minPrice"],
-                    "itemName": row["itemName"],
-                    "server": row["server"],
-                    "dc": row["dc"],
-                    "desired_state": row["desired_state"],
-                    "hq": row["hq"],
-                    "quantity": row["minListingQuantity"],
-                    "item-data": f"https://saddlebagexchange.com/queries/item-data/{row['itemID']}",
-                    "uniLink": f"https://universalis.app/market/{row['itemID']}",
-                }
-            )
-        fieldnames = list(fixed_response[0].keys())
-
-        return return_safe_html(
-            render_template(
-                "ffxiv_pricecheck.html",
-                results=fixed_response,
-                fieldnames=fieldnames,
-                len=len,
-            )
-        )
+def apply_security_headers(response):
+    return add_security_headers(response)
 
 
 @app.route("/ffxivcraftsim", methods=["GET", "POST"])
@@ -600,27 +393,28 @@ def uploadtimers():
         )
 
 
-@app.route("/itemnames", methods=["GET", "POST"])
-def itemnames():
-    if request.method == "GET":
-        return return_safe_html(render_template("itemnames.html"))
-    elif request.method == "POST":
-        json_data = {}
-        response = requests.post(
-            f"{api_url}/wow/itemnames",
-            headers={"Accept": "application/json"},
-            json=json_data,
-        ).json()
-
-        resp_list = []
-        for k, v in response.items():
-            resp_list.append({"id": k, "name": v})
-
-        return return_safe_html(
-            render_template(
-                "itemnames.html", results=resp_list, fieldnames=["id", "name"], len=len
-            )
-        )
+#
+# @app.route("/itemnames", methods=["GET", "POST"])
+# def itemnames():
+#     if request.method == "GET":
+#         return return_safe_html(render_template("itemnames.html"))
+#     elif request.method == "POST":
+#         json_data = {}
+#         response = requests.post(
+#             f"{api_url}/wow/itemnames",
+#             headers={"Accept": "application/json"},
+#             json=json_data,
+#         ).json()
+#
+#         resp_list = []
+#         for k, v in response.items():
+#             resp_list.append({"id": k, "name": v})
+#
+#         return return_safe_html(
+#             render_template(
+#                 "itemnames.html", results=resp_list, fieldnames=["id", "name"], len=len
+#             )
+#         )
 
 
 @app.route("/megaitemnames", methods=["GET", "POST"])

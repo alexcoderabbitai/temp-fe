@@ -18,7 +18,6 @@
 #         include_vendor = request.form.get("include_vendor")
 #         out_stock = request.form.get("out_stock")
 #         filters = [int(request.form.get("filters"))]
-
 #         headers = {"Accept": "application/json"}
 #         json_data = {
 #             "preferred_roi": int(roi),
@@ -35,19 +34,15 @@
 #             "show_out_stock": str_to_bool(out_stock),
 #             "universalis_list_uid": "",
 #         }
-
 #         response = requests.post(
 #             "http://api.saddlebagexchange.com/api/scan/",
 #             headers=headers,
 #             json=json_data,
 #         ).json()
-
 #         if "data" not in response:
 #             return f"Error no matching data with given inputs {response}"
 #         response = response["data"]
-
 #         fieldnames = list(response[0].keys())
-
 #         return render_template(
 #             "oldscan.html", results=response, fieldnames=fieldnames, len=len
 #         )
@@ -66,16 +61,13 @@
 #             "end_days": 0,
 #             "item_type": "all",
 #         }
-
 #         response = requests.post(
 #             "http://api.saddlebagexchange.com/history",
 #             headers={"Accept": "application/json"},
 #             json=json_data,
 #         ).json()
-
 #         if "server_distribution" not in response:
 #             return "Error refresh the page or contact the devs on discord"
-
 #         fixed_response = []
 #         for server, sale_count in response["server_distribution"].items():
 #             fixed_response.append(
@@ -85,10 +77,80 @@
 #                 }
 #             )
 #         fieldnames = list(fixed_response[0].keys())
-
 #         return return_safe_html(render_template(
 #             "ffxiv_server_history.html",
 #             results=fixed_response,
 #             fieldnames=fieldnames,
 #             len=len,
 #         ))
+
+### FFXIV price check ###
+
+# @app.route("/pricecheck", methods=["GET", "POST"])
+# def ffxiv_pricecheck():
+#     return redirect("https://saddlebagexchange.com/price-sniper")
+#     # DEPRECIATED
+#     if request.method == "GET":
+#         return return_safe_html(render_template("ffxiv_pricecheck.html"))
+#     elif request.method == "POST":
+#         json_data = json.loads(request.form.get("jsonData"))
+#         response = requests.post(
+#             f"{api_url}/pricecheck",
+#             headers={"Accept": "application/json"},
+#             json=json_data,
+#         ).json()
+#         if "matching" not in response:
+#             return "Error no matching data"
+#         if len(response["matching"]) == 0:
+#             return "Error no matching data"
+#         fixed_response = []
+#         for row in response["matching"]:
+#             fixed_response.append(
+#                 {
+#                     "minPrice": row["minPrice"],
+#                     "itemName": row["itemName"],
+#                     "server": row["server"],
+#                     "dc": row["dc"],
+#                     "desired_state": row["desired_state"],
+#                     "hq": row["hq"],
+#                     "quantity": row["minListingQuantity"],
+#                     "item-data": f"https://saddlebagexchange.com/queries/item-data/{row['itemID']}",
+#                     "uniLink": f"https://universalis.app/market/{row['itemID']}",
+#                 }
+#             )
+#         fieldnames = list(fixed_response[0].keys())
+#         return return_safe_html(
+#             render_template(
+#                 "ffxiv_pricecheck.html",
+#                 results=fixed_response,
+#                 fieldnames=fieldnames,
+#                 len=len,
+#             )
+#         )
+
+
+### SECURITY STUFF ###
+
+# @app.route("/2faca366-0ef0-4acb-9acc-3808e0470952.txt", methods=["GET", "POST"])
+# def probely():
+#     return Response(
+#         "Probely",
+#         headers={
+#             "Content-Disposition": "attachment; filename=2faca366-0ef0-4acb-9acc-3808e0470952.txt"
+#         },
+#     )
+#     # return "Probely"
+
+### SECURITY STUFF ###
+
+# @app.route(
+#     "/GitLab-DAST-Site-Validation-a8f90252-4e3a-488d-be6e-584993462fe1.txt",
+#     methods=["GET", "POST"],
+# )
+# def gitlab():
+#     return Response(
+#         "a8f90252-4e3a-488d-be6e-584993462fe1",
+#         headers={
+#             "Content-Disposition": "attachment; filename=GitLab-DAST-Site-Validation-a8f90252-4e3a-488d-be6e-584993462fe1.txt"
+#         },
+#     )
