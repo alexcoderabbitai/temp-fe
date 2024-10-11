@@ -446,55 +446,7 @@ def megaitemnames():
             )
         )
 
-
-@app.route("/petshoppinglist", methods=["GET", "POST"])
-def petshoppinglist():
-    return redirect("https://saddlebagexchange.com/wow/shopping-list")
-
-    # DEPRECIATED
-    if request.method == "GET":
-        return return_safe_html(render_template("petshoppinglist.html"))
-    elif request.method == "POST":
-        json_data = {
-            "region": request.form.get("region"),
-            "itemID": int(request.form.get("petID")),
-            "maxPurchasePrice": int(request.form.get("maxPurchasePrice")),
-            "connectedRealmIDs": {},
-        }
-
-        response = requests.post(
-            f"{api_url}/wow/shoppinglistx",
-            headers={"Accept": "application/json"},
-            json=json_data,
-        ).json()
-
-        if "data" not in response:
-            logger.error(
-                f"Error no matching data with given inputs {json_data} response {response}"
-            )
-            if NO_RATE_LIMIT:
-                return f"Error no matching data with given inputs {json_data} response {response}"
-            # send generic error message to remove XSS potential
-            return f"error no matching results found matching search inputs"
-
-        response = response["data"]
-
-        column_order = [
-            "realmID",
-            "price",
-            "quantity",
-            "realmName",
-            "realmNames",
-            "link",
-        ]
-        response = [{key: item.get(key) for key in column_order} for item in response]
-        fieldnames = list(response[0].keys())
-
-        return return_safe_html(
-            render_template(
-                "petshoppinglist.html", results=response, fieldnames=fieldnames, len=len
-            )
-        )
+        
 
 
 @app.route("/petmarketshare", methods=["GET", "POST"])
