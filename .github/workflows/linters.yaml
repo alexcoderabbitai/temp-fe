@@ -17,12 +17,33 @@ jobs:
       - name: Install dependencies
         run: pip install black
 
-      - name: Create annotation with file diff
+      - name: Run Black diff and create detailed annotations
         run: |
+          # Run black with --diff and capture the output
           black --diff . | tee diff_output.txt
+
+          # Display the diff output directly in logs (helpful for debugging)
           echo "::error::Black found code style issues. See the diff below:"
           cat diff_output.txt
 
-      # Run black check and ensure it exits with failure if needed
-      - name: Run black check
+          # Process the diff output to create annotations for each modified file/line
+          file=""
+          while IFS= read -r line; do
+            # Check if the line references a file path (starts with '---' or '+++')
+            if [[ "$line" == diff* ]]; then
+              file=$(echo "$line" | awk '{print $3}' | sed 's|b/||')
+            elif [[ "$line" =~ ^@@ ]]; then
+              # Extract line numbers from the @@ header for the change
+              line_number=$(echo "$line" | awk '{print $2}' | cut -d',' -f1 | sed 's/-//')
+            elif [ -n "$file" ]; then
+              # Create a multiline annotation for this line of the diff
+              # Each line of the diff is shown as a separate annotation
+              echo "::warning file=$file,line=$line_number::$line"
+              # Increment the line number to follow along with the diff
+              line_number=$((line_number+1))
+            fi
+          done < diff_output.txt
+
+      # Run black --check and fail the job if Black finds issues
+      - name: Run black check to enforce formatting
         run: black --check .
