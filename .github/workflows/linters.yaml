@@ -7,7 +7,6 @@ on:
   push:
 
 jobs:
-  # TODO: Fix Bandit Vulns
   "Bandit":
     runs-on: ubuntu-latest
     container: python:3.11
@@ -21,6 +20,9 @@ jobs:
           path: "app.py"
           bandit_flags: "-lll"
 
+      - name: Enable Bandit problem matcher
+        run: echo "::add-matcher::$(python -m bandit -m .github/bandit-matcher.json)"
+
   "Black":
     runs-on: ubuntu-latest
     container: python:3.11
@@ -33,3 +35,6 @@ jobs:
 
       - name: Run black check
         run: black --check .
+
+      - name: Add Black problem matcher
+        run: echo "::add-matcher::$(pwd)/.github/black-matcher.json"

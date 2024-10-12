@@ -1,0 +1,14 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "black",
+      "pattern": [
+        {
+          "regexp": "^(.+):\\s*(error|warning)\\s*(.+)$",
+          "file": 1,
+          "message": 3
+        }
+      ]
+    }
+  ]
+}
