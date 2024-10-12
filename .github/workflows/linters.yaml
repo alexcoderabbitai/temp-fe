@@ -7,7 +7,7 @@ on:
   push:
 
 jobs:
-  "Black":
+  Black:
     runs-on: ubuntu-latest
     container: python:3.11
 
@@ -17,25 +17,12 @@ jobs:
       - name: Install dependencies
         run: pip install black
 
-      - name: Run black check
-        id: black
-        run: |
-          black --check . 2>&1 | tee black_output.txt
-        continue-on-error: true
-
-      - name: Display Black diff if any
-        run: |
-          cat black_output.txt
-          git diff
-
       - name: Create annotation with file diff
         run: |
-          echo "::error::Black found code style issues. See details below:"
-          git diff | tee diff_output.txt
-          while IFS= read -r line; do
-            echo "::warning file=$line::Black reformat suggestion"
-          done < <(git diff --name-only)
+          black --diff . | tee diff_output.txt
+          echo "::error::Black found code style issues. See the diff below:"
+          cat diff_output.txt
 
-      # make sure it exits properly on error
+      # Run black check and ensure it exits with failure if needed
       - name: Run black check
-        run: git stash && black --check .
+        run: black --check .
