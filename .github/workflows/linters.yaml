@@ -24,13 +24,11 @@ jobs:
         continue-on-error: true
 
       - name: Display Black diff if any
-        if: failure()
         run: |
           cat black_output.txt
           git diff
 
       - name: Create annotation with file diff
-        if: failure()
         run: |
           echo "::error::Black found code style issues. See details below:"
           git diff | tee diff_output.txt
@@ -38,6 +36,6 @@ jobs:
             echo "::warning file=$line::Black reformat suggestion"
           done < <(git diff --name-only)
 
-      - name: Fail if Black failed
-        if: steps.black.outcome == 'failure'
-        run: exit 1
+      # make sure it exits properly on error
+      - name: Run black check
+        run: git stash && black --check .
