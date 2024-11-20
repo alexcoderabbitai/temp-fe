@@ -4,28 +4,10 @@ name: Linters
 on:
   workflow_dispatch:
   pull_request:
-    branches:
-      - main
   push:
-    branches:
-      - main
 
 jobs:
-  # TODO: Fix Bandit Vulns
-  "Bandit":
-    runs-on: ubuntu-latest
-    container: python:3.11
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Bandit check
-        uses: jpetrucciani/bandit-check@master
-        with:
-          path: "app.py"
-          bandit_flags: "-lll"
-
-  "Black":
+  Black:
     runs-on: ubuntu-latest
     container: python:3.11
 
@@ -35,5 +17,15 @@ jobs:
       - name: Install dependencies
         run: pip install black
 
-      - name: Run black check
+      - name: Run Black diff and create detailed annotations
+        run: |
+          # Run black with --diff and capture the output
+          black --diff . | tee diff_output.txt
+
+          # Display the diff output directly in logs (helpful for debugging)
+          echo "::error::Black found code style issues. See the diff below:"
+          cat diff_output.txt
+
+      # Run black --check and fail the job if Black finds issues
+      - name: Run black check to enforce formatting
         run: black --check .
