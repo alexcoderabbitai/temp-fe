@@ -19,6 +19,9 @@ from routes.general import general_bp
 from routes.wow import wow_bp
 from utils.security import add_security_headers, return_safe_html
 
+a=1
+adsf
+
 # Enable Datadog tracing
 patch_all()
 profiler = Profiler()
