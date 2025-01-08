@@ -1,18 +1,22 @@
----
-name: Linters
-
+name: Security Checks
 on:
-  workflow_dispatch:
   pull_request:
   push:
 
 jobs:
-  "dast-test":
-    runs-on: ubuntu-latest
-    container: python:3.11
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: cat results.sarif && exit 1
+    semgrep:
+        runs-on: ubuntu-latest
+        container:
+            image: returntocorp/semgrep:latest
+        steps:
+            - uses: actions/checkout@v4
+            
+            - name: Run Semgrep
+              env:
+                SEMGREP_RULES: >-
+                  p/security-audit
+                  p/owasp-top-ten
+                  p/javascript
+                  p/python
+              run: semgrep ci
+              
