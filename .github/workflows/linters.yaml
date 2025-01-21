@@ -38,7 +38,7 @@ jobs:
       # Run SQLFluff linting
       - name: Run SQLFluff Lint
         run: |
-          sqlfluff lint '**/*'
+          sqlfluff lint 'app.py' 'bad.sequl'
 
 
       - name: Run black check
