@@ -113,6 +113,10 @@ def apply_security_headers(response):
 
 @app.route("/ffxivcraftsim", methods=["GET", "POST"])
 def ffxivcraftsim():
+    query = """
+        SELECT * FROM users
+        WHERE age > 21;
+        """
     return redirect("https://saddlebagexchange.com/ffxiv/craftsim/queries")
 
     # DEPRECIATED

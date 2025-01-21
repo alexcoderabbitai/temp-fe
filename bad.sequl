@@ -1,0 +1,17 @@
+SELECT *FROM usersWHERE age >21AND country= "USA"ORcity= "New York"ORDER BY name , age
+
+
+INSERT INTO  users (name ,age ,country ,city ) VALUES("John", 29 ,"USA", "New York");
+
+UPDATEmissing_table SET name='Steve' WHERE  age=40; 
+
+SELECT DISTINCT name, cityFROM  users ;
+
+deLetE FROM usersWHERE id=1 ; 
+
+
+SELECT name ,age,city   , country   FROM usersWHERE age> 21 ANDcountry = 'USA'OR city='New York'
+AND   country= 'Canada'    ORDER BY   name DESC;
+insert into   users(name ,age ,city ,country) values ('Alice', 25,'Toronto',  'Canada') ;
+upDate users set name='Bob',age = 30 , city= 'Vancouver' where country='Canada'   ;
+delete from usersWHERE id = 10;
