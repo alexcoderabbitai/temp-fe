@@ -38,7 +38,8 @@ jobs:
       # Run SQLFluff linting
       - name: Run SQLFluff Lint
         run: |
-          sqlfluff lint '*'
+          sqlfluff lint '**/*'
+
 
       - name: Run black check
         run: black --check .
