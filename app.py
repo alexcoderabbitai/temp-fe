@@ -19,6 +19,10 @@ from routes.general import general_bp
 from routes.wow import wow_bp
 from utils.security import add_security_headers, return_safe_html
 
+a=1
+
+
+
 # Enable Datadog tracing
 patch_all()
 profiler = Profiler()
@@ -920,7 +924,7 @@ def ffxiv_scrip_exchange():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0"
 
     # for testing
 
