@@ -28,6 +28,7 @@ jobs:
         args:
         - -c
         - |
+          set -e  # Exit immediately if any command fails
           echo "Installing Semgrep..."
           pip install semgrep
           echo "Running Semgrep scan..."
