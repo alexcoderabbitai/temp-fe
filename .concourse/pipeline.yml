@@ -3,19 +3,32 @@ resources:
     type: git
     source:
       uri: https://github.com/alexcoderabbitai/temp-fe
-      branch: main
-      # No authentication is needed since the repo is public
+      branch: master
 
 jobs:
   - name: semgrep-pr-analysis
     plan:
       - get: temp-fe-repo
         trigger: true  # This triggers the job on any changes (e.g., PRs)
-      
+
       - task: run-semgrep
-        image: returntocorp/semgrep:latest  # Using the Semgrep Docker image
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: returntocorp/semgrep
+              tag: latest
+          run:
+            path: semgrep
+            args:
+              - ci
+              - --config
+              - "${SEMGREP_RULES}"
+              - --path
+              - repo
         input_mapping:
           repo: temp-fe-repo
         params:
           SEMGREP_RULES: "p/security-audit p/owasp-top-ten p/javascript p/python"  # Semgrep rules to use
-          COMMAND: "semgrep ci"  # Run Semgrep in CI mode, which runs the checks and exits with a non-zero status if issues are found
+          COMMAND: "ci"  # Run Semgrep in CI mode
