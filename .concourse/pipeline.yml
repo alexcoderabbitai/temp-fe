@@ -1,9 +1,10 @@
 resources:
-  - name: temp-fe-repo
-    type: git
-    source:
-      uri: https://github.com/alexcoderabbitai/temp-fe
-      branch: master
+- name: temp-repo
+  type: git
+  source:
+    uri: https://github.com/alexcoderabbitai/temp-fe.git
+    branch: "main"
+    skip_ssl_verification: true # Use if you have SSL issues, otherwise omit
 
 jobs:
   - name: semgrep-pr-analysis
