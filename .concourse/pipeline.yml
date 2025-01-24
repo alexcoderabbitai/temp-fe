@@ -3,33 +3,34 @@ resources:
   type: git
   source:
     uri: https://github.com/alexcoderabbitai/temp-fe.git
-    branch: "main"
+    branch: main # Track only the main branch
     skip_ssl_verification: true # Use if you have SSL issues, otherwise omit
 
 jobs:
-  - name: semgrep-pr-analysis
-    plan:
-      - get: temp-fe-repo
-        trigger: true  # This triggers the job on any changes (e.g., PRs)
-
-      - task: run-semgrep
-        config:
-          platform: linux
-          image_resource:
-            type: docker-image
-            source:
-              repository: returntocorp/semgrep
-              tag: latest
-          run:
-            path: semgrep
-            args:
-              - ci
-              - --config
-              - "${SEMGREP_RULES}"
-              - --path
-              - repo
-        input_mapping:
-          repo: temp-fe-repo
-        params:
-          SEMGREP_RULES: "p/security-audit p/owasp-top-ten p/javascript p/python"  # Semgrep rules to use
-          COMMAND: "ci"  # Run Semgrep in CI mode
+- name: run-semgrep
+  plan:
+  - get: temp-repo
+    trigger: true
+  - task: semgrep-scan
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: python
+          tag: "3.9" # Use a Python image to install Semgrep
+      inputs:
+      - name: temp-repo
+      outputs:
+      - name: semgrep-results # Save results for later use
+      run:
+        path: sh
+        args:
+        - -c
+        - |
+          echo "Installing Semgrep..."
+          pip install semgrep
+          echo "Running Semgrep scan..."
+          cd temp-repo
+          semgrep ci --config p/security-audit --config p/owasp-top-ten --config p/javascript --config p/python
+          echo "Semgrep scan completed!"
