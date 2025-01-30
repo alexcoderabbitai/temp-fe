@@ -1,0 +1,34 @@
+trigger:
+  branches:
+    include:
+      - '*'  # Runs on all branches when pushed
+
+pr:
+  branches:
+    include:
+      - '*'  # Runs on all pull requests
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: RunSemgrep
+  displayName: "Run Semgrep Scan"
+  steps:
+    - checkout: self  # Fetch the repository
+
+    - script: |
+        echo "Installing Semgrep..."
+        pip install semgrep
+      displayName: "Install Semgrep"
+
+    - script: |
+        echo "Running Semgrep scan..."
+        semgrep ci --config p/security-audit --config p/owasp-top-ten --config p/javascript --config p/python > semgrep-results.txt
+      displayName: "Run Semgrep Scan"
+
+    - task: PublishBuildArtifacts
+      inputs:
+        pathToPublish: semgrep-results.txt
+        artifactName: SemgrepResults
+      displayName: "Upload Semgrep Results"
