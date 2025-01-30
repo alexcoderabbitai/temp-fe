@@ -1,0 +1,30 @@
+version: 2.1
+
+executors:
+  semgrep-executor:
+    docker:
+      - image: returntocorp/semgrep:latest
+
+jobs:
+  semgrep:
+    executor: semgrep-executor
+    steps:
+      - checkout
+      - run:
+          name: Run Semgrep
+          environment:
+            SEMGREP_RULES: |
+              p/security-audit
+              p/owasp-top-ten
+              p/javascript
+              p/python
+          command: semgrep ci
+
+workflows:
+  version: 2
+  security_checks:
+    jobs:
+      - semgrep:
+          filters:
+            branches:
+              only: /.*/

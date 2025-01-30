@@ -1,0 +1,21 @@
+name: Security Checks
+on:
+  pull_request:
+  push:
+
+jobs:
+    semgrep:
+        runs-on: ubuntu-latest
+        container:
+            image: returntocorp/semgrep:latest
+        steps:
+            - uses: actions/checkout@v4
+            
+            - name: Run Semgrep
+              env:
+                SEMGREP_RULES: >-
+                  p/security-audit
+                  p/owasp-top-ten
+                  p/javascript
+                  p/python
+              run: semgrep ci
