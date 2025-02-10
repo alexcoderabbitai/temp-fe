@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+      - '*'  # Runs on all branches when pushed
+
+pr:
+  branches:
+    include:
+      - '*'  # Runs on all pull requests
+
+jobs:
+- job: BuildAndTest
+  displayName: "Build and Test"
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+    - script: echo Hello, world!
+      displayName: 'Run a one-line script'
+
+    - script: |
+        echo Add other tasks to build, test, and deploy your project.
+        echo See https://aka.ms/yaml
+      displayName: 'Run a multi-line script'
+
+- job: RunSemgrep
+  displayName: "Run Semgrep Scan"
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+    - checkout: self  # Fetch the repository
+
+    - script: |
+        echo "Installing Semgrep..."
+        pip install semgrep
+      displayName: "Install Semgrep"
+
+    - script: |
+        echo "Running Semgrep scan..."
+        semgrep ci --config p/security-audit --config p/owasp-top-ten --config p/javascript --config p/python
+      displayName: "Run Semgrep Scan"
