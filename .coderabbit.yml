@@ -1,0 +1,19 @@
+early_access: true
+reviews:
+  tools:
+    # actionlint:
+    #   enabled: false
+    # languagetool:
+    #   enabled: false
+    # biome:
+    #   enabled: false
+    # semgrep:
+    #   enabled: false
+    # yamllint:
+    #   enabled: false
+    github:
+      create_issues: false
+chat:
+  auto_reply: true
+  github:
+    create_issues: false
