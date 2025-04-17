@@ -15,13 +15,13 @@ locals {
 }
 
 ##################################################################
-# Insecure provider block with hardcoded AWS credentials 
-# (should be retrieved from environment variables or a secure store)
+# we do this in production
+# do the lalalalalala
 ##################################################################
 provider "aws" {
   region     = "us-east-1"
-  access_key = "AKIA123456789EXAMPLE"      # Vulnerability: Hardcoded AWS access key
-  secret_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"  # Vulnerability: Hardcoded AWS secret key
+  access_key = "AKIA123456789EXAMPLE"
+  secret_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 }
 
 ##################################################################
