@@ -1,0 +1,89 @@
+name: Auto Comment on PR
+
+on:
+  # pull_request:
+  #   types: [*]  # Triggers on all pull request events
+  pull_request:
+    types: [opened]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: trigger pr
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            @coderabbitai full review
+      - name: trigger pr
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            @coderabbitai sing me a song
+      - name: Wait 5 min
+        run: sleep 300
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            @coderabbitai
+            Use the <overall_instructions> to guide the content of the summary. Use the format shown in <example> but do not include or refer to the example's content in the final summary/report.
+            <overall_instructions>
+            **Instructions:**
+            Generate a weekly code review report for the author of this pull request only following scoring parameters. Calculate the scores and compile the results into a table so that the team-wise average score can be easily determined.
+            **Scoring Parameters:**
+
+            1. **Basic Code Standards (Score out of 2)**  
+               - Avoidance of hard-coded values  
+               - No repetition of code (DRY principle)
+
+            2. **Code Readability (Score out of 3)**  
+               - Presence of meaningful comments  
+               - Consistent naming conventions:  
+                 - JavaScript: CamelCase  
+                 - CSS: kebab-case  
+                 - Liquid: snake_case  
+               - Proper variable declaration using `const` and `let`
+
+            3. **Error Handling (Score out of 4)**  
+               - Handling failure scenarios (e.g., try-catch, fallbacks)  
+               - Proper loading state implementation (e.g., button click loading states)  
+               - Handling edge cases (e.g., checking for undefined or missing values)  
+               - Input validation (ensuring correct user inputs)
+
+            4. **Shopify Theme Check Validation (Score: 0 or 1)**  
+               - `0` → Not Passed  
+               - `1` → Passed
+
+            5. **Responsive Design (Score: 0 or 1)**  
+               - `0` → Not Responsive  
+               - `1` → Responsive
+            **Final Score Calculation:**  
+            Combine the scores from the parameters above to derive the final code quality score (out of 5).
+            **Output Format:**  
+            Provide the final report in a table format with the following columns (use shorthand notations), be sure to include this list at the top above the chart in the "Column Notation" section so users understand what the columns mean:
+            - **User Name (User)**
+            - **Basic Code Standards (BCS) (out of 2)**
+            - **Code Readability (CR) (out of 3)**
+            - **Error Handling (EH) (out of 4)**
+            - **Shopify Theme Check (STC) (0/1)**
+            - **Responsive Design (RD) (0/1)**
+            - **Final Code Quality Score (FCQS) (out of 11)**
+            </overall_instructions>
+            <example>
+            ## Column Notation
+            - **User Name (User)**
+            - **Basic Code Standards (BCS) (out of 2)**
+            - **Code Readability (CR) (out of 3)**
+            - **Error Handling (EH) (out of 4)**
+            - **Shopify Theme Check (STC) (0/1)**
+            - **Responsive Design (RD) (0/1)**
+            - **Final Code Quality Score (FCQS) (out of 11)**
+            ## Score Chart
+            | User     | BCS (2) | CR (3) | EH (4) | STC (0/1) | RD (0/1) | FCQS (11) |
+            |----------|---------|--------|--------|-----------|----------|-----------|
+            | John Doe | 2       | 3      | 4      | 1         | 1        | 11        |
+            </example>
