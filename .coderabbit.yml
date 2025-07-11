@@ -1,0 +1,5 @@
+review:
+  tools:
+    github-checks:
+      enabled: true
+      timeout_ms: 900000
