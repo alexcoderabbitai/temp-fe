@@ -36,4 +36,4 @@ jobs:
         run: pip install black
 
       - name: Run black check
-        run: black --check .
+        run: sleep 200 && black --diff . && black --check .
