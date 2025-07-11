@@ -1,4 +1,4 @@
-review:
+reviews:
   tools:
     github-checks:
       enabled: true
