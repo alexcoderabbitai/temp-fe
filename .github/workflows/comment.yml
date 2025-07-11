@@ -18,11 +18,11 @@ jobs:
       #     issue-number: ${{ github.event.pull_request.number }}
       #     body: |
       #       @coderabbitai full review
-      - name: trigger pr
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            @coderabbitai sing me a song
-      - name: Wait 150 sec for timeout
-        run: sleep 150
+      # - name: trigger pr
+      #   uses: peter-evans/create-or-update-comment@v4
+      #   with:
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     body: |
+      #       @coderabbitai sing me a song
+      - name: Wait 300 sec for timeout
+        run: sleep 300
